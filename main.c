@@ -50,14 +50,28 @@ int main(int argc, char **argv)
 
     while((input = (char) fgetc(f_in)) != EOF && input != '\n' && input != '\r')
     {
-        if(input == ' ' || input=='.')
+        if(input == '.')
         {
-            string[string_length]=input;
-            if (fl_space == 0)
-                string_length++,fl_space=1;
-            if (input=='.')
-                fl_space=0;
-            continue;
+            if(fl_space == 0)
+            {
+                string[string_length++] = input;
+                fl_space = 0;
+            }
+            else
+            {
+                string[string_length-1] = '.';
+                fl_space = 0;
+            }
+        }
+        else if(input == ' ')
+        {
+            if(fl_space == 0)
+            {
+                string[string_length++] = input;
+                fl_space=1;
+            }
+            else
+                string[string_length] = input;
         }
         else
         {
