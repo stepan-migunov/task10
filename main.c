@@ -31,11 +31,6 @@ int main(int argc, char **argv)
         printf("Unable to open file %s\n", argv[1]);
         return 1;
     }
-    char string[256], input;
-    int string_length = 0;
-    while ((input = (char) fgetc(f_in)) != EOF && input != '\n' && input != '\r')
-        string[string_length++] = input;
-    string[string_length] = '\0';
     FILE *f_out = freopen(argv[2], "w", stdout);
     if (f_out == NULL)
     {
@@ -43,44 +38,39 @@ int main(int argc, char **argv)
         return 1;
     }
 
-///WRITING
 
+///READING STRING
+    char string[256], input;
+    int string_length = 0;
+    int fl_space = 0, fl_dot_before=0;
 
-///DELETING DOUBLE SPACES
-    char *finder = NULL;
-    while ((finder = strstr(string, "  ")) != NULL)
+    while((input = (char)fgetc(f_in)) == ' ')
+        continue;
+    string[string_length++]=input;
+
+    while((input = (char) fgetc(f_in)) != EOF && input != '\n' && input != '\r')
     {
-        char string_[256];
-        for (int i = 0;; ++i)
+        if(input == ' ' || input=='.')
         {
-            string_[i] = finder[i];
-            if (finder[i] == '\0')
-                break;
+            string[string_length]=input;
+            if (fl_space == 0)
+                string_length++,fl_space=1;
+            if (input=='.')
+                fl_space=0;
+            continue;
         }
-        strcpy(finder, string_ + 1);
-        string[--string_length] = '\0';
+        else
+        {
+            string[string_length++]=input;
+            fl_space=0;
+        }
     }
+    if(string[string_length-1]==' ')
+        string[--string_length]='\0';
+    else
+        string[string_length]='\0';
 
-///DELETING SPACES-DOT
-    while ((finder = strstr(string, " .")) != NULL)
-    {
-        char string_[256];
-        for (int i = 0;; ++i)
-        {
-            string_[i] = finder[i];
-            if (finder[i] == '\0')
-                break;
-        }
-        strcpy(finder, string_ + 1);
-        string[--string_length] = '\0';
-    }
-    if (strchr(string, ' ') == string && string_length--)
-        strcpy(string, string + 1);
-    if (string[string_length - 1] == ' ')
-        string[--string_length] = '\0';
     fprintf(f_out, "===>The string without unwanted spaces:\n--->%s\n", string);
-
-
     char string_prime[256];
     string_prime[0] = string_prime[1] = 0;
 
