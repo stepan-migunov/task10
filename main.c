@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     }
     char string[256], input;
     int string_length = 0;
-    while ((input = (char) fgetc(f_in)) != EOF)
+    while ((input = (char) fgetc(f_in)) != EOF && input != '\n')
         string[string_length++] = input;
     string[string_length] = '\0';
     FILE *f_out = freopen(argv[2], "w", stdout);
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
     while (s != ' ')
         s = string[--s_first_index];
     int lastword_length = s_last_index - ++s_first_index + 1;
-    char lastword[lastword_length + 1];
+    char lastword[256];
     for (int i = s_first_index; i <= s_last_index; ++i)
         lastword[i - s_first_index] = string[i];
     lastword[lastword_length] = '\0';
