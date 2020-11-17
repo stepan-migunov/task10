@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     }
     char string[256], input;
     int string_length = 0;
-    while ((input = (char) fgetc(f_in)) != EOF && input != '\n')
+    while ((input = (char) fgetc(f_in)) != EOF && input != '\n' && input != '\r')
         string[string_length++] = input;
     string[string_length] = '\0';
     FILE *f_out = freopen(argv[2], "w", stdout);
