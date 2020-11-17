@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 
 char* reverse(char string[])
@@ -114,7 +115,7 @@ int main(int argc, char **argv)
     fprintf(f_out, "===>The words except the ones, which are equal to the last word\n--->%s\n", string_prime);
 
     size_t string_prime_length = strlen(string_prime);
-    char string_2prime[string_prime_length + 1];
+    char* string_2prime = malloc((1+string_prime_length)*sizeof(char));
     for(int i = 0; i <= string_prime_length; ++i)
         string_2prime[i]=0;
 
