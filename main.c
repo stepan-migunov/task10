@@ -77,7 +77,7 @@ int main(int argc, char **argv)
     if (strchr(string, ' ') == string && string_length--)
         strcpy(string, string + 1);
     if (string[string_length - 1] == ' ')
-        string[string_length - 1] = '\0';
+        string[--string_length] = '\0';
     fprintf(f_out, "===>The string without unwanted spaces:\n--->%s\n", string);
 
 
