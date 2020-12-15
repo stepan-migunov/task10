@@ -44,19 +44,19 @@ int main(int argc, char **argv)
         if(input == '.')
             if(fl_space == 0)
                 string[string_length++] = input,
-                        fl_space = 0;
+                fl_space = 0;
             else
                 string[string_length-1] = '.',
-                        fl_space = 0;
+                fl_space = 0;
         else if(input == ' ')
             if(fl_space == 0)
                 string[string_length++] = input,
-                        fl_space=1;
+                fl_space=1;
             else
                 string[string_length] = input;
         else
             string[string_length++]=input,
-                    fl_space=0;
+            fl_space=0;
 
     if(string[string_length-1]==' ')
         string[--string_length]='\0';
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
     do
         if (strcmp(lastword, pch) != 0)
             strcat(string_prime, pch),
-                    strcat(string_prime, " ");
+            strcat(string_prime, " ");
     while ((pch = strtok(NULL, " .")) != NULL);
 
 ///WRITING TO THE FILE
@@ -101,8 +101,9 @@ int main(int argc, char **argv)
     pch = strtok(string_prime, " ");
     while (pch != NULL)
         strcat(string_2prime, reverse(pch)),
-                strcat(string_2prime, " "),
-                pch = strtok(NULL, " ");
+        strcat(string_2prime, " "),
+        pch = strtok(NULL, " ");
+    
     fprintf(f_out, "===>Reversed words\n--->%s\n", string_2prime);
     return 0;
 }
