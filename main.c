@@ -6,10 +6,11 @@
 char* reverse(char string[])
 {
     size_t string_length = strlen(string);
+    char t;
     for (int i = 0; i < string_length / 2; ++i)
     {
-        char t = string[i];
-        string[i] = string[string_length - i - 1];
+        t = string[i],
+        string[i] = string[string_length - i - 1],
         string[string_length - i - 1] = t;
     }
     return string;
