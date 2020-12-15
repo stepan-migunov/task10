@@ -8,11 +8,9 @@ char* reverse(char string[])
     size_t string_length = strlen(string);
     char t;
     for (int i = 0; i < string_length / 2; ++i)
-    {
         t = string[i],
         string[i] = string[string_length - i - 1],
         string[string_length - i - 1] = t;
-    }
     return string;
 }
 
@@ -20,24 +18,17 @@ int main(int argc, char **argv)
 {
 ///CHECKING IF WE HAVE INVALID NUMBER OF FILES
     if (argc <= 2)
-    {
-        printf("Use two files' names as arguments of this program: "
+        return printf("Use two files' names as arguments of this program: "
                "first file as an input of this program;\n second file as an output of this program\n");
-        return 1;
-    }
 ///REPARING FILES TO WORK WITH
     FILE *f_in = freopen(argv[1], "r", stdin);
     if (f_in == NULL)
-    {
-        printf("Unable to open file %s\n", argv[1]);
-        return 1;
-    }
+        return printf("Unable to open file %s\n", argv[1]);
+
     FILE *f_out = freopen(argv[2], "w", stdout);
     if (f_out == NULL)
-    {
-        printf("Unable to create file %s\n", argv[2]);
-        return 1;
-    }
+        return printf("Unable to create file %s\n", argv[2]);
+
 
 
 ///READING STRING
